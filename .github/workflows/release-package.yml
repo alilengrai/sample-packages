@@ -14,9 +14,11 @@ jobs:
         with:
           node-version: 12
       - run: ls -R
-      - run: cp ./sample-packages/npm
+        working-directory: ./sample-packages/npm
       - run: npm ci
+        working-directory: ./sample-packages/npm
       - run: npm test
+        working-directory: ./sample-packages/npm
 
   publish-gpr:
     needs: build
@@ -28,6 +30,8 @@ jobs:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
+        working-directory: ./sample-packages/npm
       - run: npm publish
+        working-directory: ./sample-packages/npm
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
